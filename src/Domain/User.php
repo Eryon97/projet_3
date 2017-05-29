@@ -41,6 +41,12 @@ class User implements UserInterface
     private $mail;
 
     /**
+     *Newsletter
+     *@var boolean
+     */
+     private $news;
+
+    /**
      * Role.
      * Values : ROLE_USER or ROLE_ADMIN.
      *
@@ -100,10 +106,19 @@ class User implements UserInterface
     public function getMail() {
         return $this->mail;
     }
-
+    
     public function setMail($mail) {
         $this->mail = $mail;
         return $this;
+    }
+
+    public function setNews($news) {
+        $this->news = $news;
+        return $this;
+    }
+
+    public function getNews() {
+        return $this->news;
     }
 
     public function getRole() {

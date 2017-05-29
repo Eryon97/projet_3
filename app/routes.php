@@ -8,6 +8,7 @@ use MicroCMS\Form\Type\CommentType;
 use MicroCMS\Form\Type\ArticleType;
 use MicroCMS\Form\Type\UserType;
 
+
 // Home page
 $app->get('/', function () use ($app) {
     $articles = $app['dao.article']->findAll();
@@ -65,7 +66,7 @@ $app->match('/create', function(Request $request) use ($app) {
         $user->setPassword($password); 
         $app['dao.user']->save($user);
         $app['session']->getFlashBag()->add('success', 'Le compte utilisateur a été crée.');
-    }
+        }
     return $app['twig']->render('account.html.twig', array(
         'title' => 'Creer un compte',
         'userForm' => $userForm->createView()));

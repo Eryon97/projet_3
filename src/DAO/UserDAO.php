@@ -56,12 +56,13 @@ class UserDAO extends DAO implements UserProviderInterface
             'usr_salt' => $user->getSalt(),
             'usr_password' => $user->getPassword(),
             'usr_mail' => $user->getMail(),
+            'usr_news' => $user->getNews(),
             'usr_role' => $user->getRole()
             );
 
-        if ($user->getId()) {
-            // The user has already been saved : update it
-            $this->getDb()->update('t_user', $userData, array('usr_id' => $user->getId()));
+        if ($user->getUsername()) {
+            // The user has already been saved
+            $exist = true;
         } else {
             // The user has never been saved : insert it
             $this->getDb()->insert('t_user', $userData);
@@ -127,6 +128,7 @@ class UserDAO extends DAO implements UserProviderInterface
         $user->setUsername($row['usr_name']);
         $user->setPassword($row['usr_password']);
         $user->setMail($row['usr_mail']);
+        $user->setNews($row['usr_news']);
         $user->setSalt($row['usr_salt']);
         $user->setRole($row['usr_role']);
         return $user;

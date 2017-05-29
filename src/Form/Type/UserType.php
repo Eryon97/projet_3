@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserType extends AbstractType
 {
@@ -16,6 +17,10 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', TextType::class)
+            ->add('news', CheckboxType::class, array(
+                'label' => 'S\'abonner à la newsletter ?',
+                'required' => false,
+            ))
             ->add('mail', RepeatedType::class, array(
                 'type'            => EmailType::class,
                  'invalid_message' => 'Les adresses E-Mail doivent etre identiques.',
