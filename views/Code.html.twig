@@ -1,0 +1,29 @@
+ <div class="form-group">
+        {{ form_label(userForm.email.first, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_widget(userForm.email.first, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.email.second, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_widget(userForm.email.second, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+
+                 ->add('email', RepeatedType::class, array(
+                 'type'            => EmailType::class,
+                 'invalid_message' => 'Les champs E-Mail doivent etre identiques.',
+                 'options'         => array('required' => true),
+                 'first_options'   => array('label' => 'Adresse E-mail'),
+                 'second_options'  => array('label' => 'Confirmation E-Mail'),
+             ))
