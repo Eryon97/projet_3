@@ -62,7 +62,7 @@ class UserDAO extends DAO implements UserProviderInterface
 
         if ($user->getUsername()) {
             // The user has already been saved
-            $exist = true;
+            
         } else {
             // The user has never been saved : insert it
             $this->getDb()->insert('t_user', $userData);

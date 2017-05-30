@@ -9,6 +9,7 @@ use MicroCMS\Form\Type\ArticleType;
 use MicroCMS\Form\Type\UserType;
 
 
+
 // Home page
 $app->get('/', function () use ($app) {
     $articles = $app['dao.article']->findAll();
@@ -92,8 +93,8 @@ $app->match('/admin/article/add', function(Request $request) use ($app) {
         $app['dao.article']->save($article);
         $app['session']->getFlashBag()->add('success', 'The article was successfully created.');
     }
-    return $app['twig']->render('article_form.html.twig', array(
-        'title' => 'New article',
+    return $app['twig']->render('article_add.html.twig', array(
+        'title' => 'Ajouter un billet',
         'articleForm' => $articleForm->createView()));
 })->bind('admin_article_add');
 
@@ -162,7 +163,7 @@ $app->match('/admin/user/add', function(Request $request) use ($app) {
         $app['dao.user']->save($user);
         $app['session']->getFlashBag()->add('success', 'The user was successfully created.');
     }
-    return $app['twig']->render('user_form.html.twig', array(
+    return $app['twig']->render('account.html.twig', array(
         'title' => 'New user',
         'userForm' => $userForm->createView()));
 })->bind('admin_user_add');
