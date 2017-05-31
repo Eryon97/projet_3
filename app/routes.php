@@ -7,6 +7,7 @@ use MicroCMS\Domain\User;
 use MicroCMS\Form\Type\CommentType;
 use MicroCMS\Form\Type\ArticleType;
 use MicroCMS\Form\Type\UserType;
+use MicroCMS\Form\Type\UserTypeAdmin;
 
 
 
@@ -108,7 +109,7 @@ $app->match('/admin/article/{id}/edit', function($id, Request $request) use ($ap
         $app['session']->getFlashBag()->add('success', 'The article was successfully updated.');
     }
     return $app['twig']->render('article_form.html.twig', array(
-        'title' => 'Edit article',
+        'title' => 'Editer le billet',
         'articleForm' => $articleForm->createView()));
 })->bind('admin_article_edit');
 
@@ -133,7 +134,7 @@ $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($ap
         $app['session']->getFlashBag()->add('success', 'The comment was successfully updated.');
     }
     return $app['twig']->render('comment_form.html.twig', array(
-        'title' => 'Edit comment',
+        'title' => 'Editer le commentaire',
         'commentForm' => $commentForm->createView()));
 })->bind('admin_comment_edit');
 
@@ -148,7 +149,7 @@ $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($ap
 // Add a user
 $app->match('/admin/user/add', function(Request $request) use ($app) {
     $user = new User();
-    $userForm = $app['form.factory']->create(UserType::class, $user);
+    $userForm = $app['form.factory']->create(UserTypeAdmin::class, $user);
     $userForm->handleRequest($request);
     if ($userForm->isSubmitted() && $userForm->isValid()) {
         // generate a random salt value
@@ -164,14 +165,14 @@ $app->match('/admin/user/add', function(Request $request) use ($app) {
         $app['session']->getFlashBag()->add('success', 'The user was successfully created.');
     }
     return $app['twig']->render('account.html.twig', array(
-        'title' => 'New user',
+        'title' => 'Créer un nouvel utilisateur',
         'userForm' => $userForm->createView()));
 })->bind('admin_user_add');
 
 // Edit an existing user
 $app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) {
     $user = $app['dao.user']->find($id);
-    $userForm = $app['form.factory']->create(UserType::class, $user);
+    $userForm = $app['form.factory']->create(UserTypeAdmin::class, $user);
     $userForm->handleRequest($request);
     if ($userForm->isSubmitted() && $userForm->isValid()) {
         $plainPassword = $user->getPassword();
@@ -183,8 +184,8 @@ $app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) 
         $app['dao.user']->save($user);
         $app['session']->getFlashBag()->add('success', 'The user was successfully updated.');
     }
-    return $app['twig']->render('user_form.html.twig', array(
-        'title' => 'Edit user',
+    return $app['twig']->render('account.html.twig', array(
+        'title' => 'Modifier un utilisateur',
         'userForm' => $userForm->createView()));
 })->bind('admin_user_edit');
 

@@ -4,17 +4,18 @@
 
 {% block content %}
 <p>
+    <div class="well">
     <h2>{{ article.title }}</h2>
     <p>{{ article.content }}</p>
-
-    <h3>Comments</h3>
+    </div>
+    <h3>Commentaires</h3>
     {% for comment in comments %}
         <strong>{{ comment.author.username }}</strong> said : {{ comment.content }}<br>
     {% else %}
-        No comments yet.
+        Pas de commentaire pour le moment.
     {% endfor %}
 
-    <h3>Add a comment</h3>
+    <h3>Ajouter un commentaire</h3>
     {% if commentForm %}
         {{ form_start(commentForm) }}
             <div class="form-group">
@@ -22,11 +23,11 @@
                 {{ form_widget(commentForm.content, { 'attr':  {
                     'rows': '4',
                     'class': 'form-control',
-                    'placeholder': 'Enter your comment'
+                    'placeholder': 'Commentaire'
                 }}) }}
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Publish comment" />
+                <input type="submit" class="btn btn-primary" value="Publier" />
             </div>
         {{ form_end(commentForm) }}
         {% for flashMessage in app.session.flashbag.get('success') %}
@@ -35,7 +36,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <a href="{{ path('login') }} ">Log in</a> to add comments.
+        <a href="{{ path('login') }} ">Connectez vous</a> pour ajouter un commentaire.
     {% endif %}
 </p>
 {% endblock %}

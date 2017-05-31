@@ -1,3 +1,47 @@
 if ($user->getUsername()) {
             // The user has already been saved : update it
             $this->getDb()->update('t_user', $userData, array('usr_name' => $user->getUsername()));
+
+    <div class="form-group">
+        {{ form_label(userForm.mail.first, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_widget(userForm.mail.first, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.mail.second, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_widget(userForm.mail.second, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.news, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-1">
+            {{ form_widget(userForm.news, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+
+
+    ->add('news', CheckboxType::class, array(
+                'label' => 'S\'abonner à la newsletter ?',
+                'required' => false,
+            ))
+            ->add('mail', RepeatedType::class, array(
+                'type'            => EmailType::class,
+                 'invalid_message' => 'Les adresses E-Mail doivent etre identiques.',
+                 'options'         => array('required' => true),
+                 'first_options'   => array('label' => 'Adresse E-Mail'),
+                 'second_options'  => array('label' => 'Confirmation adresse E-Mail'),
+             ))

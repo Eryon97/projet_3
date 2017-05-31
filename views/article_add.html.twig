@@ -7,8 +7,9 @@
 <h2 class="text-center">{{ block('title') }}</h2>
 
 {% autoescape %}
-<!DOCTYPE html>
 <html>
+
+
 <head>
   <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
   <script>tinymce.init({
@@ -35,10 +36,12 @@
  });</script>
 </head>
 <body>
-  <textarea></textarea>
+<form action="#" method="post" class="well">
+  <textarea name="content"></textarea>
   <div class="col-sm-offset-8 col-sm-4">
-    <input type="submit" class="btn btn-primary" value="Ajouter" />
+    <input type="submit" class="btn btn-primary" value="Ajouter" name="billet" />
   </div>
+</form>
 </body>
 </html>
 {% endautoescape %}
