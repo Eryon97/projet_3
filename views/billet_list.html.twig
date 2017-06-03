@@ -1,0 +1,33 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Liste{% endblock %}
+
+{% block header %}
+{% autoescape 'html' %}
+<div class="header">
+    <img src="https://img4.hostingpics.net/pics/124375WDF2511129.jpg" width="100%" height="700px"/>
+</div>
+{% endautoescape %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <p class="title"><strong>Billet simple pour l'Alaska </strong><span class="glyphicon glyphicon-globe"></span></p>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    {% for article in articles %}
+    <article>
+        <div class="well">
+            <div class="articleTitleCenter">
+                <p><strong><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></strong></p>
+            
+            </div>
+            <p>{{ article.content }}</p>  
+        </div>
+    </article>
+    {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

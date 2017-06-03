@@ -99,28 +99,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @inheritDoc
-     */
-
-    public function getMail() {
-        return $this->mail;
-    }
-    
-    public function setMail($mail) {
-        $this->mail = $mail;
-        return $this;
-    }
-
-    public function setNews($news) {
-        $this->news = $news;
-        return $this;
-    }
-
-    public function getNews() {
-        return $this->news;
-    }
-
     public function getRole() {
         return $this->role;
     }

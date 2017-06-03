@@ -49,7 +49,7 @@ class ArticleDAO extends DAO
     public function save(Article $article) {
         $articleData = array(
             'art_title' => $article->getTitle(),
-            'art_content' => $article->getContent(),
+            'art_content' => $_POST['content'],
             );
 
         if ($article->getId()) {

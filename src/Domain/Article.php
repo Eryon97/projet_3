@@ -25,6 +25,8 @@ class Article
      */
     private $content;
 
+    private $contentHTML;
+
     public function getId() {
         return $this->id;
     }

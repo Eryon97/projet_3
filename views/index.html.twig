@@ -5,19 +5,25 @@
 {% block header %}
 {% autoescape 'html' %}
 <div class="header">
-    <a href="http://www.hlgjyl888.com/WDF-2511129.html"><img src="https://img4.hostingpics.net/pics/124375WDF2511129.jpg" width="100%" height="600px"/></a>
+    <img src="https://img4.hostingpics.net/pics/124375WDF2511129.jpg" width="100%" height="700px"/>
 </div>
 {% endautoescape %}
 {% endblock %}
 
 {% block content %}
 <div class="row">
+    <p class="title"><strong>Billet simple pour l'Alaska </strong><span class="glyphicon glyphicon-globe"></span></p>
+</div>
+<div class="row">
     <div class="col-md-9">
     {% for article in articles %}
     <article>
         <div class="well">
-            <h2><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></h2>
-            <p>{{ article.content }}</p>
+            <div class="articleTitleCenter">
+                <p><strong><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></strong></p>
+                              
+            </div>
+            <p>{{ article.content }}</p>  
         </div>
     </article>
     {% endfor %}
@@ -26,7 +32,21 @@
 
     <div class="col-md-3">
         <div class="well">
-            <h3>FUTURE BIO</h3>
+        <div class="center">
+            <h3><strong>Jean Forteroche</strong></h3>
+            <p></br></p>
+            <img src='http://md1.libe.com/photo/981925-portraits.jpg?modified_at=1484070265' width='80%' height="200px"/>
+            <p style="font-size: 16px">
+                </br>
+                Je vous souhaite la bienvenue sur mon site. </br>
+                Je suis écrivain et auteur du livre "Sur la route de Madagascar". Je travaille actuellement sur mon prochain roman intitulé "Billet simple pour l'Alaska". </br>
+                Je souhaite publier mon livre par chapitre en ligne sur ce site. 
+            </p>
+            <a href="https://www.facebook.com" target="_blank"><img src="{{ asset('/images/facebook.png') }}" alt="Facebook" width="32px" height="32px"/></a>
+            <a href="https://www.twitter.com" target="_blank"><img src="{{ asset('/images/twitter.png') }}" width="32px" height="32px" alt="Twitter"/></a>
+            <a href="https://www.plus.google.com" target="_blank"><img src="{{ asset('/images/google-plus.png') }}" width="32px" height="32px" alt="Google Plus"/></a>
+            <a href="https://www.linkedin.com" target="_blank"><img src="{{ asset('/images/linkedin.png') }}" width="32px" height="32px" alt="Linkedin"/></a>
+        </div>
         </div>    
     </div>
 </div>

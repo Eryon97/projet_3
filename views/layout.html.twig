@@ -7,6 +7,7 @@
     <link href="{{ asset('/lib/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('/lib/bootstrap/css/microcms.css') }}" rel="stylesheet">
     <link href="{{ asset('/lib/bootstrap/css/menu.css') }}" rel="stylesheet">
+    <link href="{{ asset('/lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <title>Blog de Jean Forteroche - {% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -20,10 +21,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ path('home') }}">Blog de Jean Forteroche : Un billet pour l'alaska.</a>
+                    <a class="navbar-brand" href="{{ path('home') }}">Blog de Jean Forteroche : Billet simple pour l'alaska.</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="{{ path('list') }}" data-toggle="modal">
+                            <span class="glyphicon glyphicon-user"></span>Liste des billets</a>
+                        </li>
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Administration <b class="caret"></b></a>
