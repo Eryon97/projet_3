@@ -9,6 +9,7 @@ use MicroCMS\Domain\User;
 use MicroCMS\Form\Type\ArticleType;
 use MicroCMS\Form\Type\CommentType;
 use MicroCMS\Form\Type\UserType;
+use MicroCMS\Form\Type\UserTypeAdmin;
 
 class AdminController {
 
@@ -35,15 +36,15 @@ class AdminController {
      */
     public function addArticleAction(Request $request, Application $app) {
         $article = new Article();
-        $articleAdd = $app['form.factory']->create(ArticleType::class, $article);
-        $articleAdd->handleRequest($request);
-        if ($articleAdd->isSubmitted() && $articleAdd->isValid()) {
+        $articleForm = $app['form.factory']->create(ArticleType::class, $article);
+        $articleForm->handleRequest($request);
+        if ($articleForm->isSubmitted() && $articleForm->isValid()) {
             $app['dao.article']->save($article);
             $app['session']->getFlashBag()->add('success', 'Le billet a été crée.');
         }
         return $app['twig']->render('article_add.html.twig', array(
             'title' => 'Ajouter un billet',
-            'articleAdd' => $articleAdd->createView()));
+            'articleForm' => $articleForm->createView()));
     }
 
     /**
@@ -123,7 +124,7 @@ class AdminController {
      */
     public function addUserAction(Request $request, Application $app) {
         $user = new User();
-        $userForm = $app['form.factory']->create(UserType::class, $user);
+        $userForm = $app['form.factory']->create(UserTypeAdmin::class, $user);
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             // generate a random salt value
@@ -152,7 +153,7 @@ class AdminController {
      */
     public function editUserAction($id, Request $request, Application $app) {
         $user = $app['dao.user']->find($id);
-        $userForm = $app['form.factory']->create(UserType::class, $user);
+        $userForm = $app['form.factory']->create(UserTypeAdmin::class, $user);
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $plainPassword = $user->getPassword();

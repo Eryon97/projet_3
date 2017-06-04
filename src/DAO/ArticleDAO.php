@@ -6,6 +6,7 @@ use MicroCMS\Domain\Article;
 
 class ArticleDAO extends DAO
 {
+
     /**
      * Return a list of all articles, sorted by date (most recent first).
      *
@@ -19,7 +20,7 @@ class ArticleDAO extends DAO
         $articles = array();
         foreach ($result as $row) {
             $articleId = $row['art_id'];
-            $articles[$articleId] = $this->buildDomainObject($row);
+            $articles[$articleId] = $this->buildDomainObject($row); 
         }
         return $articles;
     }
@@ -49,7 +50,7 @@ class ArticleDAO extends DAO
     public function save(Article $article) {
         $articleData = array(
             'art_title' => $article->getTitle(),
-            'art_content' => $_POST['content'],
+            'art_content' => $article->getContent(),
             );
 
         if ($article->getId()) {

@@ -6,7 +6,7 @@
 <p>
     <div class="well">
     <h2>{{ article.title }}</h2>
-    <p>{{ article.content }}</p>
+    <p>{{ article.content|raw }}</p>
     </div>
     <h3>Commentaires</h3>
     {% for comment in comments %}

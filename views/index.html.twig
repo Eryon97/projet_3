@@ -23,7 +23,7 @@
                 <p><strong><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></strong></p>
                               
             </div>
-            <p>{{ article.content }}</p>  
+            <p>{{ article.content|raw }}</p>  
         </div>
     </article>
     {% endfor %}
