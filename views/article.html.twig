@@ -4,15 +4,22 @@
 
 {% block content %}
 <p>
+    <div class="big">
+        <p><strong>{{ article.title }}</strong></p>
+    </div>
+    </br>
     <div class="well">
-    <h2>{{ article.title }}</h2>
-    <p>{{ article.content|raw }}</p>
+        <p>{{ article.content|raw }}</p>
     </div>
     <h3>Commentaires</h3>
     {% for comment in comments %}
-        <strong>{{ comment.author.username }}</strong> said : {{ comment.content }}<br>
+    <div class="wellComment">
+        <strong>{{ comment.author.username }}</strong> a dit : {{ comment.content }}<br>
+    </div>        
     {% else %}
-        Pas de commentaire pour le moment.
+        <div class="whiteText">
+        <strong>Pas de commentaire pour le moment.</strong>
+        </div>
     {% endfor %}
 
     <h3>Ajouter un commentaire</h3>
@@ -36,7 +43,11 @@
             </div>
         {% endfor %}
     {% else %}
+    <div class="col-md-4">
+    <div class="link">    
         <a href="{{ path('login') }} ">Connectez vous</a> pour ajouter un commentaire.
+    </div>
+    </div>
     {% endif %}
 </p>
 {% endblock %}

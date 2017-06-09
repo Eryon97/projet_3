@@ -1,3 +1,6 @@
 body {
     background-color: #eee;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: 0;
 }

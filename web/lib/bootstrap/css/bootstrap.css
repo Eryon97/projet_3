@@ -5,7 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: sans-serif;
+  font-family:  sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -1086,7 +1086,6 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
 }
 input,
 button,
@@ -1183,7 +1182,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: inherit;
+  font-family: "Times New Roman", inherit;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -3998,7 +3997,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #777;
   text-decoration: none;
   cursor: not-allowed;
-  background-color: transparent;
+  background-color: #555;
 }
 .nav .open > a,
 .nav .open > a:hover,
@@ -4155,6 +4154,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .tab-content > .tab-pane {
   display: none;
 }
+
 .tab-content > .active {
   display: block;
 }
@@ -4525,7 +4525,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .disabled > a:hover,
 .navbar-default .navbar-nav > .disabled > a:focus {
   color: #ccc;
-  background-color: transparent;
+  background-color: #555;
 }
 .navbar-default .navbar-toggle {
   border-color: #ddd;
@@ -4566,7 +4566,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {
     color: #ccc;
-    background-color: transparent;
+    background-color: #555;
   }
 }
 .navbar-default .navbar-link {
@@ -4668,7 +4668,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,
   .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
     color: #444;
-    background-color: transparent;
+    background-color: #555;
   }
 }
 .navbar-inverse .navbar-link {

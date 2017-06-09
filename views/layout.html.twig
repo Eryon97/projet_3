@@ -9,7 +9,7 @@
     <link href="{{ asset('/lib/bootstrap/css/menu.css') }}" rel="stylesheet">
     <title>Blog de Jean Forteroche - {% block title %}{% endblock %}</title>
 </head>
-<body>
+<body background="{{ asset('/images/background.jpg') }}">
     <div>{% block header %}{% endblock %}</div>
     <div class="container" style="padding-top:30px;">
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
@@ -20,13 +20,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ path('home') }}">Blog de Jean Forteroche : Billet simple pour l'alaska.</a>
+                    <a class="navbar-brand" href="{{ path('home') }}">Billet simple pour l'Alaska.</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="{{ path('list') }}" data-toggle="modal">
-                            <span class="glyphicon glyphicon-user"></span>Liste des billets</a>
+                            <span class="glyphicon glyphicon-book"></span> Liste des billets</a>
                         </li>
                         {% if is_granted('ROLE_ADMIN') %}
                             <li class="dropdown">
@@ -64,7 +64,7 @@
         <div id="content">{% block content %}{% endblock %}</div></div>
         <div class="row">
         <footer class="footer">
-            Blog de Jean Forteroche, developpé avec PHP.
+            <strong>Blog de Jean Forteroche, developpé avec PHP.</strong>
         </footer>
     </div>
     </div>

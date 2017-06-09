@@ -3,7 +3,7 @@
 {% block title %}Créer un compte{% endblock %}
 
 {% block content %}
-<h2 class="text-center">{{ block('title') }}</h2>
+<h2 class="text-center">{{ title }}</h2>
 {% for flashMessage in app.session.flashbag.get('success') %}
 <div class="alert alert-success">
     {{ flashMessage }}
@@ -20,13 +20,14 @@
 </div>
 {% endif %}
 
+<div class="col-md-6 col-md-offset-3">
 <div class="well">
 {{ form_start(userForm, { 'attr': {'class': 'form-horizontal'} }) }}
     <div class="form-group">
         {{ form_label(userForm.username, 'Nom d\'utilisateur', { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
+            'class': 'col-sm-4 control-label'
         }}) }}
-        <div class="col-sm-4">
+        <div class="col-sm-8">
             {{ form_errors(userForm.username) }}
             {{ form_widget(userForm.username, { 'attr':  {
                 'class': 'form-control'
@@ -35,9 +36,9 @@
     </div>
     <div class="form-group">
         {{ form_label(userForm.password.first, null, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
+            'class': 'col-sm-4 control-label'
         }}) }}
-        <div class="col-sm-4">
+        <div class="col-sm-8">
             {{ form_widget(userForm.password.first, { 'attr':  {
                 'class': 'form-control'
             }}) }}
@@ -45,9 +46,9 @@
     </div>
     <div class="form-group">
         {{ form_label(userForm.password.second, null, { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
+            'class': 'col-sm-4 control-label'
         }}) }}
-        <div class="col-sm-4">
+        <div class="col-sm-8">
             {{ form_widget(userForm.password.second, { 'attr':  {
                 'class': 'form-control'
             }}) }}
@@ -56,9 +57,9 @@
     
     <div class="form-group">
         {{ form_label(userForm.role, 'Status', { 'label_attr':  {
-            'class': 'col-sm-5 control-label'
+            'class': 'col-sm-4 control-label'
         }}) }}
-        <div class="col-sm-2">
+        <div class="col-sm-8">
             {{ form_errors(userForm.role) }}
             {{ form_widget(userForm.role, { 'attr':  {
                 'class': 'form-control'
@@ -66,10 +67,11 @@
         </div>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-5 col-sm-3">
-            <input type="submit" class="btn btn-primary" value="Sauvegarder" />
+        <div class="col-sm-offset-9 col-sm-3">
+            <input type="submit" class="btn btn-primary" value="Enregistrer" />
         </div>
     </div>
 {{ form_end(userForm) }}
+</div>
 </div>
 {% endblock %}

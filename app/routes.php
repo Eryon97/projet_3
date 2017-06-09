@@ -41,7 +41,7 @@ $app->get('/admin/comment/{id}/delete', "MicroCMS\Controller\AdminController::de
 ->bind('admin_comment_delete');
 
 // Add a user
-$app->match('/admin/user/add', "MicroCMS\Controller\AdminController::addUserAction")
+$app->match('/admin/user/add', "MicroCMS\Controller\AdminController::addUserActionAdmin")
 ->bind('admin_user_add');
 
 // Add a user

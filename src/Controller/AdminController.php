@@ -124,6 +124,34 @@ class AdminController {
      */
     public function addUserAction(Request $request, Application $app) {
         $user = new User();
+        $userForm = $app['form.factory']->create(UserType::class, $user);
+        $userForm->handleRequest($request);
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            // generate a random salt value
+            $salt = substr(md5(time()), 0, 23);
+            $user->setSalt($salt);
+            $plainPassword = $user->getPassword();
+            // find the default encoder
+            $encoder = $app['security.encoder.bcrypt'];
+            // compute the encoded password
+            $password = $encoder->encodePassword($plainPassword, $user->getSalt());
+            $user->setPassword($password); 
+            $app['dao.user']->save($user);
+            $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été crée.');
+        }
+        return $app['twig']->render('account.html.twig', array(
+            'title' => 'Créer un nouvel utilisateur',
+            'userForm' => $userForm->createView()));
+    }
+
+    /**
+     * Add user controller.
+     *
+     * @param Request $request Incoming request
+     * @param Application $app Silex application
+     */
+    public function addUserActionAdmin(Request $request, Application $app) {
+        $user = new User();
         $userForm = $app['form.factory']->create(UserTypeAdmin::class, $user);
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {

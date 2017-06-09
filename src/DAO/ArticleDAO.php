@@ -26,6 +26,24 @@ class ArticleDAO extends DAO
     }
 
     /**
+     * Return last article, sorted by date (most recent first).
+     *
+     * @return array Last article
+     */
+    public function findLast() {
+        $sql = "select * from t_article order by art_id desc LIMIT 3";
+        $result = $this->getDb()->fetchAll($sql);
+
+        // Convert query result to an array of domain objects
+        $lastArticles = array();
+        foreach ($result as $row) {
+            $lastArticleId = $row['art_id'];
+            $lastArticles[$lastArticleId] = $this->buildDomainObject($row); 
+        }
+        return $lastArticles;
+    }
+
+    /**
      * Returns an article matching the supplied id.
      *
      * @param integer $id The article id.

@@ -15,8 +15,8 @@ class HomeController {
      * @param Application $app Silex application
      */
     public function indexAction(Application $app) {
-        $articles = $app['dao.article']->findAll();
-        return $app['twig']->render('index.html.twig', array('articles' => $articles));
+        $lastArticles = $app['dao.article']->findLast();
+        return $app['twig']->render('index.html.twig', array('lastArticles' => $lastArticles));
     }
 
     /**
