@@ -2,11 +2,15 @@
 
 namespace MicroCMS\DAO;
 
+
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use MicroCMS\Domain\User;
+use Silex\Application;
+
 
 class UserDAO extends DAO implements UserProviderInterface
 {
@@ -49,8 +53,9 @@ class UserDAO extends DAO implements UserProviderInterface
      * Saves a user into the database.
      *
      * @param \MicroCMS\Domain\User $user The user to save
+     * @param Application $app Silex application
      */
-    public function save(User $user) {
+    public function save(User $user, Application $app) {
         $userData = array(
             'usr_name' => $user->getUsername(),
             'usr_salt' => $user->getSalt(),
@@ -60,18 +65,20 @@ class UserDAO extends DAO implements UserProviderInterface
 
         $username = $user->getUsername();
 
+
         $sql = 'select usr_name from t_user where usr_name= ?';
 
         $row = $this->getDb()->fetchAssoc($sql, array($username));
 
         if ($row) {
-            echo "IL EXISTE DEJA !!!";   
+            $app['session']->getFlashBag()->add('failure', 'L\'utilisateur existe deja !');   
         } else {
             // The user has never been saved : insert it
             $this->getDb()->insert('t_user', $userData);
             // Get the id of the newly created user and set it on the entity.
             $id = $this->getDb()->lastInsertId();
             $user->setId($id);
+            $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été crée.');
         }
     }
 

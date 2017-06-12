@@ -136,8 +136,7 @@ class AdminController {
             // compute the encoded password
             $password = $encoder->encodePassword($plainPassword, $user->getSalt());
             $user->setPassword($password); 
-            $app['dao.user']->save($user);
-            $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été crée.');
+            $app['dao.user']->save($user, $app);
         }
         return $app['twig']->render('account.html.twig', array(
             'title' => 'Créer un nouvel utilisateur',

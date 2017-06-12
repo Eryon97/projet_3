@@ -34,17 +34,14 @@ class User implements UserInterface
      */
     private $salt;
 
-    /**
-     *Email.
-     * @var string
-     */
-    private $mail;
 
     /**
-     *Newsletter
+     *Same Username
      *@var boolean
      */
-     private $news;
+    private $sameUsername = false;
+    
+
 
     /**
      * Role.
