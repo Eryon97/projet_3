@@ -65,7 +65,6 @@ class UserDAO extends DAO implements UserProviderInterface
 
         $username = $user->getUsername();
 
-
         $sql = 'select usr_name from t_user where usr_name= ?';
 
         $row = $this->getDb()->fetchAssoc($sql, array($username));

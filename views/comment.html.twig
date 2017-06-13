@@ -1,31 +1,17 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}{{ article.title }}{% endblock %}
+{% block title %}Repondre{% endblock %}
 
 {% block content %}
 <p>
     <div class="big">
-        <p><strong>{{ article.title }}</strong></p>
+        <p><strong>{{ comment.author.username }}</strong></p>
     </div>
     </br>
     <div class="well">
-        <p>{{ article.content|raw }}</p>
+        <p>{{ comment.content|raw }}</p>
     </div>
-    <h3>Commentaires</h3>
-    {% for comment in comments %}
-    <div class="wellComment">
-        <strong>{{ comment.author.username }}</strong> a dit : {{ comment.content }}<br>
-        {{ comment.parent }}
-        <a href="{{ path('comment', { 'id': comment.id }) }}">Repondre</a>
-    </div>        
-    {% else %}
-        <div class="whiteText">
-        <strong>Pas de commentaire pour le moment.</strong>
-        </div>
-    {% endfor %}
-
-    <h3>Ajouter un commentaire</h3>
-    {% if commentForm %}
+    <h3>Repondre</h3>
         {{ form_start(commentForm) }}
             <div class="form-group">
                 {{ form_errors(commentForm.content) }}
@@ -44,12 +30,5 @@
                 {{ flashMessage }}
             </div>
         {% endfor %}
-    {% else %}
-    <div class="col-md-4">
-    <div class="link">    
-        <a href="{{ path('login') }} ">Connectez vous</a> pour ajouter un commentaire.
-    </div>
-    </div>
-    {% endif %}
 </p>
 {% endblock %}

@@ -31,6 +31,14 @@ class Comment
      * @var \MicroCMS\Domain\Article
      */
     private $article;
+ 
+    /**
+     * Associated comment.
+     *
+     * @var \MicroCMS\Domain\Comment
+     */
+    private $comment;
+
 
     public function getId() {
         return $this->id;
@@ -65,6 +73,15 @@ class Comment
 
     public function setArticle(Article $article) {
         $this->article = $article;
+        return $this;
+    }
+
+    public function getParent() {
+        return $this->comment;
+    }
+
+    public function setParent($parent) {
+        $this->parent = $parent;
         return $this;
     }
 }
