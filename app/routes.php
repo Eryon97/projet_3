@@ -32,10 +32,6 @@ $app->match('/admin/article/{id}/edit', "MicroCMS\Controller\AdminController::ed
 $app->get('/admin/article/{id}/delete', "MicroCMS\Controller\AdminController::deleteArticleAction")
 ->bind('admin_article_delete');
 
-// Add response comment
-$app->match('/comment/{id}', "MicroCMS\Controller\HomeController::addResponseComment")
-->bind('comment');
-
 // Edit an existing comment
 $app->match('/admin/comment/{id}/edit', "MicroCMS\Controller\AdminController::editCommentAction")
 ->bind('admin_comment_edit');

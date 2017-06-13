@@ -16,7 +16,7 @@
     <div class="wellComment">
         <strong>{{ comment.author.username }}</strong> a dit : {{ comment.content }}<br>
         {{ comment.parent }}
-        <a href="{{ path('comment', { 'id': comment.id }) }}">Repondre</a>
+        <a href="#">Repondre</a>
     </div>        
     {% else %}
         <div class="whiteText">

@@ -73,34 +73,4 @@ class HomeController {
             'last_username' => $app['session']->get('_security.last_username'),
         ));
     }
-
-    /**
-     * Comment details controller.
-     *
-     * @param integer $id Comment id
-     * @param Request $request Incoming request
-     * @param Application $app Silex application
-     */
-    public function addResponseComment($id, Request $resquest, Application $app) {
-        $comment = $app['dao.comment']->find($id);
-        $commentFormView = null;
-        if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
-            // A user is fully authenticated : he can add comments
-            $newComment = new Comment();
-            $newComment->setComment($comment);
-            $user = $app['user'];
-            $newComment->setAuthor($user);
-            $commentForm = $app['form.factory']->create(CommentType::class, $comment);
-            if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-                $app['dao.comment']->save($comment);
-                $app['session']->getFlashBag()->add('success', 'Votre commentaire a été ajouté.');
-            }
-            $commentFormView = $commentForm->createView();
-        }
-
-        return $app['twig']->render('comment.html.twig', array(
-            'comment' => $comment,
-            'commentForm' => $commentFormView));
-
-    }
 }

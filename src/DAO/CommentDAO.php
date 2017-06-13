@@ -80,7 +80,7 @@ class CommentDAO extends DAO
     public function find($id) {
         $sql = "select * from t_comment where com_id=?";
         $row = $this->getDb()->fetchAssoc($sql, array($id));
-
+        
         if ($row)
             return $this->buildDomainObject($row);
         else
@@ -96,6 +96,7 @@ class CommentDAO extends DAO
         $commentData = array(
             'art_id' => $comment->getArticle()->getId(),
             'usr_id' => $comment->getAuthor()->getId(),
+            'comment_id_parent' => $comment->getParent()->getId(),
             'com_content' => $comment->getContent()
             );
 
@@ -149,7 +150,6 @@ class CommentDAO extends DAO
         $comment = new Comment();
         $comment->setId($row['com_id']);
         $comment->setContent($row['com_content']);
-        $comment->setParent($row['comment_id_parent']);
 
         if (array_key_exists('art_id', $row)) {
             // Find and set the associated article
@@ -162,6 +162,12 @@ class CommentDAO extends DAO
             $userId = $row['usr_id'];
             $user = $this->userDAO->find($userId);
             $comment->setAuthor($user);
+        }
+        if (array_key_exists('comment_id_parent', $row)) {
+            // Find and set the associated author
+            $parentId = $row['comment_id_parent'];
+            //$parent = $this->find($parentId);
+            $comment->setParent($parentId);
         }
         
         return $comment;
