@@ -15,7 +15,9 @@
     {% for comment in comments %}
     <div class="wellComment">
         <strong>{{ comment.author.username }}</strong> a dit : {{ comment.content }}<br>
-        {{ comment.article.content|raw }}
+        {% if comment.parent.content is defined  %}
+            {{ comment.parent.content }}
+        {% endif %}
         <a href="#">Repondre</a>
     </div>        
     {% else %}
