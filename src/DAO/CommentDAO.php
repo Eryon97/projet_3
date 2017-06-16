@@ -80,11 +80,15 @@ class CommentDAO extends DAO
     public function find($id) {
         $sql = "select * from t_comment where com_id=?";
         $row = $this->getDb()->fetchAssoc($sql, array($id));
-        
-        if ($row)
-            return $this->buildDomainObject($row);
-        else
-            throw new \Exception("No comment matching id " . $id);
+
+        if (isset($id)) {
+            if ($row) {
+                return $this->buildDomainObject($row);
+            }
+            else {
+                throw new \Exception("No comment matching id " . $id);
+            }
+        }
     }
 
     /**
@@ -96,7 +100,6 @@ class CommentDAO extends DAO
         $commentData = array(
             'art_id' => $comment->getArticle()->getId(),
             'usr_id' => $comment->getAuthor()->getId(),
-            'comment_id_parent' => $comment->getParent()->getId(),
             'com_content' => $comment->getContent()
             );
 
@@ -151,6 +154,13 @@ class CommentDAO extends DAO
         $comment->setId($row['com_id']);
         $comment->setContent($row['com_content']);
 
+        if (array_key_exists('comment_id_parent', $row)) {
+            // Find and set the associated response
+            $parentId = $row['comment_id_parent'];
+            $parent = $this->find($parentId);
+            $comment->setParent($parent);
+            print_r ($parent); 
+        }
         if (array_key_exists('art_id', $row)) {
             // Find and set the associated article
             $articleId = $row['art_id'];
@@ -163,13 +173,6 @@ class CommentDAO extends DAO
             $user = $this->userDAO->find($userId);
             $comment->setAuthor($user);
         }
-        if (array_key_exists('comment_id_parent', $row)) {
-            // Find and set the associated author
-            $parentId = $row['comment_id_parent'];
-            //$parent = $this->find($parentId);
-            $comment->setParent($parentId);
-        }
-        
         return $comment;
     }
 }

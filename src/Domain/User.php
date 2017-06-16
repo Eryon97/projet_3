@@ -34,15 +34,6 @@ class User implements UserInterface
      */
     private $salt;
 
-
-    /**
-     *Same Username
-     *@var boolean
-     */
-    private $sameUsername = false;
-    
-
-
     /**
      * Role.
      * Values : ROLE_USER or ROLE_ADMIN.

@@ -31,13 +31,13 @@ class Comment
      * @var \MicroCMS\Domain\Article
      */
     private $article;
- 
+
     /**
-     * Associated comment.
+     * response comment.
      *
      * @var \MicroCMS\Domain\Comment
      */
-    private $comment;
+    private $parent;
 
 
     public function getId() {
@@ -77,7 +77,7 @@ class Comment
     }
 
     public function getParent() {
-        return $this->comment;
+        return $this->parent;
     }
 
     public function setParent($parent) {
