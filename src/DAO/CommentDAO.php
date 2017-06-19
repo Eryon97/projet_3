@@ -16,22 +16,12 @@ class CommentDAO extends DAO
      */
     private $userDAO;
 
-    /**
-     * @var \MicroCMS\DAO\parentDAO
-     */
-    private $parentDAO;
-
-
     public function setArticleDAO(ArticleDAO $articleDAO) {
         $this->articleDAO = $articleDAO;
     }
 
     public function setUserDAO(UserDAO $userDAO) {
         $this->userDAO = $userDAO;
-    }
-
-    public function setParentDAO(ParentDAO $parentDAO) {
-        $this->parentDAO = $parentDAO;
     }
 
     /**
@@ -65,7 +55,7 @@ class CommentDAO extends DAO
 
         // art_id is not selected by the SQL query
         // The article won't be retrieved during domain objet construction
-        $sql = "select com_id, com_content, usr_id, comment_id_parent from t_comment where art_id=? order by com_id desc";
+        $sql = "select com_id, com_content, usr_id, report from t_comment where art_id=? order by com_id desc";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
         // Convert query result to an array of domain objects
@@ -94,6 +84,54 @@ class CommentDAO extends DAO
         if (isset($id)) {
             if ($row) {
                 return $this->buildDomainObject($row);
+            }
+            else {
+                throw new \Exception("No comment matching id " . $id);
+            }
+        }
+    }
+
+    /**
+     * Returns a comment matching the supplied id.
+     *
+     * @param integer $id The comment id
+     *
+     * @return \MicroCMS\Domain\Comment|throws an exception if no matching comment is found
+     */
+    public function report($id) {
+        $sql = "select report from t_comment where com_id=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if (isset($id)) {
+            if ($row) {
+                $report = array(
+                    'report' => 1
+                );
+                $this->getDb()->update('t_comment', $report, array('com_id' => $id));
+            }
+            else {
+                throw new \Exception("No comment matching id " . $id);
+            }
+        }
+    }
+
+    /**
+     * Returns a comment matching the supplied id.
+     *
+     * @param integer $id The comment id
+     *
+     * @return \MicroCMS\Domain\Comment|throws an exception if no matching comment is found
+     */
+    public function removeReport($id) {
+        $sql = "select report from t_comment where com_id=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if (isset($id)) {
+            if ($row) {
+                $report = array(
+                    'report' => NULL
+                );
+                $this->getDb()->update('t_comment', $report, array('com_id' => $id));
             }
             else {
                 throw new \Exception("No comment matching id " . $id);
@@ -163,14 +201,8 @@ class CommentDAO extends DAO
         $comment = new Comment();
         $comment->setId($row['com_id']);
         $comment->setContent($row['com_content']);
+        $comment->setReport($row['report']);
 
-        if (array_key_exists('comment_id_parent', $row)) {
-            // Find and set the associated response
-            $parentId = $row['comment_id_parent'];
-            $parent = $this->parentDAO->find($parentId);
-            $comment->setParent($parent);
-             
-        }
         if (array_key_exists('art_id', $row)) {
             // Find and set the associated article
             $articleId = $row['art_id'];
@@ -183,7 +215,6 @@ class CommentDAO extends DAO
             $user = $this->userDAO->find($userId);
             $comment->setAuthor($user);
         }
-        print_r ($comment);
         return $comment;
     }
 }

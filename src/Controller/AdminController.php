@@ -109,6 +109,17 @@ class AdminController {
      * @param integer $id Comment id
      * @param Application $app Silex application
      */
+    public function removeReportAction($id, Application $app) {
+        $app['dao.comment']->removeReport($id);
+        return $app->redirect($app['url_generator']->generate('admin'));
+    }
+
+    /**
+     * Delete comment controller.
+     *
+     * @param integer $id Comment id
+     * @param Application $app Silex application
+     */
     public function deleteCommentAction($id, Application $app) {
         $app['dao.comment']->delete($id);
         $app['session']->getFlashBag()->add('success', 'Le commentaire a été supprimé.');

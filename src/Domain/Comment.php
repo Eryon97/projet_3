@@ -33,12 +33,11 @@ class Comment
     private $article;
 
     /**
-     * response comment.
+     * Comment content.
      *
-     * @var \MicroCMS\Domain\Comment
+     * @var integer
      */
-    private $parent;
-
+    private $report;
 
     public function getId() {
         return $this->id;
@@ -76,12 +75,14 @@ class Comment
         return $this;
     }
 
-    public function getParent() {
-        return $this->parent;
+    public function getReport() {
+        return $this->report;
     }
 
-    public function setParent($parent) {
-        $this->parent = $parent;
+    public function setReport($report) {
+        $this->report = $report;
         return $this;
     }
+
+
 }

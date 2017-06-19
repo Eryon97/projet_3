@@ -64,14 +64,10 @@ $app['dao.article'] = function ($app) {
 $app['dao.user'] = function ($app) {
     return new MicroCMS\DAO\UserDAO($app['db']);
 };
-$app['dao.parent'] = function ($app) {
-    return new MicroCMS\DAO\ParentDAO($app['db']);
-};
 $app['dao.comment'] = function ($app) {
     $commentDAO = new MicroCMS\DAO\CommentDAO($app['db']);
     $commentDAO->setArticleDAO($app['dao.article']);
     $commentDAO->setUserDAO($app['dao.user']);
-    $commentDAO->setParentDAO($app['dao.parent']);
     return $commentDAO;
 };
 

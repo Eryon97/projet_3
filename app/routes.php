@@ -12,6 +12,12 @@ $app->get('/list', "MicroCMS\Controller\HomeController::listAction")
 $app->match('/article/{id}', "MicroCMS\Controller\HomeController::articleAction")
 ->bind('article');
 
+// Report comment
+$app->get('/report/{id}', "MicroCMS\Controller\HomeController::reportAction")
+->bind('comment_report');
+
+
+
 // Login form
 $app->get('/login', "MicroCMS\Controller\HomeController::loginAction")
 ->bind('login');
@@ -35,6 +41,10 @@ $app->get('/admin/article/{id}/delete', "MicroCMS\Controller\AdminController::de
 // Edit an existing comment
 $app->match('/admin/comment/{id}/edit', "MicroCMS\Controller\AdminController::editCommentAction")
 ->bind('admin_comment_edit');
+
+//Remove report 
+$app->get('/admin/comment/remove/report/{id}', "MicroCMS\Controller\AdminController::removeReportAction")
+->bind('admin_comment_remove_report');
 
 // Remove a comment
 $app->get('/admin/comment/{id}/delete', "MicroCMS\Controller\AdminController::deleteCommentAction")

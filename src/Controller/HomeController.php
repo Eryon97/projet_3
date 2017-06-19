@@ -28,6 +28,17 @@ class HomeController {
         $articles = $app['dao.article']->findAll();
         return $app['twig']->render('billet_list.html.twig', array('articles' => $articles));
     }
+
+    /**
+     * Article details controller.
+     *
+     * @param integer $id Article id
+     * @param Application $app Silex application
+     */
+    public function reportAction($id, Application $app){
+        $reports = $app['dao.comment']->report($id);
+        return $app->redirect($app['url_generator']->generate('home'));
+    }
     
     /**
      * Article details controller.
