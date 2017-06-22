@@ -37,6 +37,7 @@ class HomeController {
      */
     public function reportAction($id, Application $app){
         $reports = $app['dao.comment']->report($id);
+        $app['session']->getFlashBag()->add('success', 'Votre signalement a été envoyé à l\'administration.');
         return $app->redirect($app['url_generator']->generate('home'));
     }
     

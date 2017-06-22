@@ -55,10 +55,12 @@ class Article
         $content = str_replace("[/b]", "</strong>", $content);
         
         $content = str_replace("[br/]", "<br/>", $content);
-        $content = str_replace("[br]", "", $content);
+        $content = str_replace("[br]", "<br/>", $content);
         
         $content = str_replace("[i]", "<em>", $content);
         $content = str_replace("[/i]", "</em>", $content);
+
+        $content = str_replace("\n", '<br/>', $content);
         
         $content = str_replace("[code]", "<code>", $content);
         $content = str_replace("[/code]", "</code>", $content);

@@ -2,7 +2,7 @@
 {% set adminMenu = true %}
 
 {% block title %}
-<div class="adminTitle">{{ title }}</div>
+Ajouter un billet
 {% endblock %}
 
 {% block content %}
@@ -68,7 +68,7 @@
         </div>
     </div>
     <div class="col-sm-offset-8 col-sm-4">
-      <input type="submit" class="btn btn-primary" value="Enregistrer" />
+      <input type="submit" formnovalidate="true" class="btn btn-primary" value="Enregistrer" />
     </div>
 
 {{ form_end(articleForm) }}

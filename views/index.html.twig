@@ -1,6 +1,6 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block header %}
 {% autoescape 'html' %}
@@ -11,9 +11,15 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="row">
     <p class="title"><strong>Billet simple pour l'Alaska </strong><span class="glyphicon glyphicon-globe"></span></p>
 </div>
+{% for flashMessage in app.session.flashbag.get('success') %}
+<div class="alert alert-success">
+    {{ flashMessage }}
+</div>
+{% endfor %}
 <div class="row">
     <h1>Derniers chapitres parus :</h1>
     <div class="col-md-offset-1 col-md-7">

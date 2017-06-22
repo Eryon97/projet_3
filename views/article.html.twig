@@ -3,11 +3,9 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block content %}
-<p>
     <div class="big">
         <p><strong>{{ article.title }}</strong></p>
     </div>
-    </br>
     <div class="well">
         <p>{{ article.content|raw }}</p>
     </div>
@@ -68,5 +66,4 @@
     </div>
     </div>
     {% endif %}
-</p>
 {% endblock %}

@@ -111,6 +111,7 @@ class AdminController {
      */
     public function removeReportAction($id, Application $app) {
         $app['dao.comment']->removeReport($id);
+        $app['session']->getFlashBag()->add('success', 'Le signalement a été retiré.');
         return $app->redirect($app['url_generator']->generate('admin'));
     }
 
@@ -174,7 +175,7 @@ class AdminController {
             // compute the encoded password
             $password = $encoder->encodePassword($plainPassword, $user->getSalt());
             $user->setPassword($password); 
-            $app['dao.user']->save($user);
+            $app['dao.user']->save($user, $app);
             $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été crée.');
         }
         return $app['twig']->render('account.html.twig', array(
@@ -200,8 +201,7 @@ class AdminController {
             // compute the encoded password
             $password = $encoder->encodePassword($plainPassword, $user->getSalt());
             $user->setPassword($password); 
-            $app['dao.user']->save($user);
-            $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été modifié.');
+            $app['dao.user']->update($user, $app);
         }
         return $app['twig']->render('account.html.twig', array(
             'title' => 'Modifier un utilisateur',

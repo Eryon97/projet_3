@@ -82,6 +82,33 @@ class UserDAO extends DAO implements UserProviderInterface
     }
 
     /**
+     * Update a user into the database.
+     *
+     * @param \MicroCMS\Domain\User $user The user to save
+     * @param Application $app Silex application
+     */
+    public function update(User $user, Application $app) {
+        $userData = array (
+            'usr_name' => $user->getUsername(),
+            'usr_salt' => $user->getSalt(),
+            'usr_password' => $user->getPassword(),
+            'usr_role' => $user->getRole()
+        );
+
+        if ($user->getId()) {
+            $this->getDb()->update('t_user', $userData, array('usr_id' => $user->getId()));
+            $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été mis à jour.');            
+        } else {
+            // The user has never been saved : insert it
+            $this->getDb()->insert('t_user', $userData);
+            // Get the id of the newly created user and set it on the entity.
+            $id = $this->getDb()->lastInsertId();
+            $user->setId($id);
+            $app['session']->getFlashBag()->add('success', 'L\'utilisateur a été crée.');
+        }
+    }
+
+    /**
      * Removes an user from the database.
      *
      * @param integer $id The user id.
