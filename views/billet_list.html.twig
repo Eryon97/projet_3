@@ -19,7 +19,7 @@
             <div class="articleTitleCenter">
                 <p><span class="glyphicon glyphicon-tags"></span><strong><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}"> {{ article.title }}</a></strong></p>
             </div>
-            <p>{{ article.content|raw }}</p>  
+            <p>{{ article.content|replace({'\n':'<br/>'})|raw }}</p>  
         </div>
     </article>
     {% endfor %}

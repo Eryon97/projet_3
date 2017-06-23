@@ -29,7 +29,7 @@
                 <div class="articleTitleCenter">
                     <p><span class="glyphicon glyphicon-tags"></span><strong><a class="articleTitle" href="{{ path('article', { 'id': lastArticle.id }) }}"> {{ lastArticle.title }}</a></strong></p>             
                 </div>
-                <p>{{ lastArticle.content|striptags|truncate(50) }}</p>  
+                <p>{{ lastArticle.content|replace({'\n':'<br/>'})|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|truncate(50) }}</p>
             </div>
         </article>
     {% endfor %}
@@ -47,10 +47,10 @@
                     Je suis acteur et écrivain, auteur du livre "Sur la route de Madagascar". Je travaille actuellement sur mon prochain roman intitulé "Billet simple pour l'Alaska". </br>
                     Je souhaite publier mon livre par chapitre en ligne sur ce site. 
                 </p>
-                <a href="https://www.facebook.com" target="_blank"><img src="{{ asset('/images/facebook.png') }}" alt="Facebook" width="32px" height="32px"/></a>
-                <a href="https://www.twitter.com" target="_blank"><img src="{{ asset('/images/twitter.png') }}" width="32px" height="32px" alt="Twitter"/></a>
-                <a href="https://www.plus.google.com" target="_blank"><img src="{{ asset('/images/google-plus.png') }}" width="32px" height="32px" alt="Google Plus"/></a>
-                <a href="https://www.linkedin.com" target="_blank"><img src="{{ asset('/images/linkedin.png') }}" width="32px" height="32px" alt="Linkedin"/></a>
+                <a href="https://www.facebook.com" target="_blank"><img src="{{ asset('/web/images/facebook.png') }}" alt="Facebook" width="32px" height="32px"/></a>
+                <a href="https://www.twitter.com" target="_blank"><img src="{{ asset('/web/images/twitter.png') }}" width="32px" height="32px" alt="Twitter"/></a>
+                <a href="https://www.plus.google.com" target="_blank"><img src="{{ asset('/web/images/google-plus.png') }}" width="32px" height="32px" alt="Google Plus"/></a>
+                <a href="https://www.linkedin.com" target="_blank"><img src="{{ asset('/web/images/linkedin.png') }}" width="32px" height="32px" alt="Linkedin"/></a>
             </div>
         </div>    
     </div>

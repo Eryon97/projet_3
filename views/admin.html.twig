@@ -38,7 +38,7 @@ Administration
                 {% for article in articles %}
                 <tr>
                     <td><a class="articleTitle" href="{{ path('article', { 'id': article.id }) }}">{{ article.title }}</a></td>
-                    <td>{{ article.content |striptags| truncate(60) }}</td>
+                    <td>{{ article.content|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|truncate(60) }}</td>
                     <td>
                         <a href="{{ path('admin_article_edit', { 'id': article.id }) }}" class="btn btn-info btn-xs" title="Editer"><span class="glyphicon glyphicon-edit"></span></a>
                         <button type="button" class="btn btn-danger btn-xs" title="Supprimer" data-toggle="modal" data-target="#articleDialog{{ article.id }}"><span class="glyphicon glyphicon-remove"></span>
@@ -88,10 +88,10 @@ Administration
                         <tr>
                             <td><a class="articleTitle" href="{{ path('article', { 'id': comment.article.id }) }}">{{ comment.article.title }}</a></td>
                             <td>{{ comment.author.username }}</td>
-                            <td>{{ comment.content |striptags| truncate(60) }}</td>
+                            <td>{{ comment.content|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|truncate(60) }}</td>
                             <td>
                                 <a href="{{ path('admin_comment_edit', { 'id': comment.id }) }}" class="btn btn-info btn-xs" title="Editer"><span class="glyphicon glyphicon-edit"></span></a>
-                                <button type="button" class="btn btn-succes btn-xs" title="Enlevé signalement" data-toggle="modal" data-target="#reportDialog{{ comment.id }}"><span class="glyphicon glyphicon-ok"></span>
+                                <button type="button" class="btn btn-succes btn-xs" title="Enlever signalement" data-toggle="modal" data-target="#reportDialog{{ comment.id }}"><span class="glyphicon glyphicon-ok"></span>
                                 </button>
                                 <div class="modal fade" id="reportDialog{{ comment.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">

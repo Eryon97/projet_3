@@ -79,7 +79,7 @@ $app->error(function (\Exception $e, Request $request, $code) use ($app) {
             $message = 'Accès refusé.';
             break;
         case 404:
-            $message = 'The requested resource could not be found.';
+            $message = 'La page demandé n\'existe pas !';
             break;
         default:
             $message = "Quelque chose ne s'est pas passé comme prévu.";
